@@ -1,6 +1,7 @@
 const express = require('express');
-const app = express();
 const todoStore = require('./todoStore');
+
+const app = express();
 
 app.get('/', (req, res) => {
   res.set({
