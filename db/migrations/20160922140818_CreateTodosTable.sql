@@ -4,7 +4,7 @@
 CREATE TABLE todo (
        id INT AUTO_INCREMENT PRIMARY KEY,
        title VARCHAR(255) NOT NULL,
-       complete TINYINT(1)
+       completed TINYINT(1)
 ) ENGINE=INNODB;
 
 -- +goose Down
