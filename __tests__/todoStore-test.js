@@ -1,10 +1,10 @@
 function createTodo(connection) {
   return new Promise((resolve, reject) => {
     connection.query('INSERT INTO todo SET ?',
-                     { title: 'Learn React', completed: 0 },
-                     (err, result) => {
-                       resolve();
-                     });
+      { title: 'Learn React', completed: 0 },
+      (err, result) => {
+        resolve();
+      });
   });
 }
 
