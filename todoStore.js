@@ -2,7 +2,7 @@ const db = require('./db');
 
 module.exports = {
   list() {
-    return db.query('SELECT * FROM todo').then((result) => {
+    return db.query('todo').then((result) => {
       return result.map((todo) => {
         return {
           id: todo.id,

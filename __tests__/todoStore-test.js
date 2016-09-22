@@ -1,48 +1,31 @@
-function createTodo(connection) {
-  return new Promise((resolve, reject) => {
-    connection.query('INSERT INTO todo SET ?',
-      { title: 'Learn React', completed: 0 },
-      (err, result) => {
-        resolve();
-      });
-  });
+const db = require('../db');
+
+function createTodo() {
+  return db.insert('todo', { title: 'Learn React', completed: 0 });
 }
 
-function destroyTodos(connection) {
-  return new Promise((resolve, reject) => {
-    connection.query('DELETE FROM todo', () => {
-      resolve();
-    });
-  });
+function destroyTodos() {
+  return db.deleteAll('todo');
 }
 
 describe('todoStore', () => {
   const todoStore = require('../todoStore');
-  const mysql = require('mysql');
 
   describe('list', () => {
-    let connection;
-
     beforeAll(() => {
-      connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'store-user',
-        password: 'store-secret',
-        database: 'store',
-      });
-      connection.connect();
+      db.connect()
     });
 
     afterAll(() => {
-      connection.end();
+      db.end();
     });
 
     beforeEach(async () => {
-      await createTodo(connection);
+      await createTodo();
     });
 
     afterEach(async () => {
-      await destroyTodos(connection);
+      await destroyTodos();
     });
 
     it('should retrieve all todos', async () => {
